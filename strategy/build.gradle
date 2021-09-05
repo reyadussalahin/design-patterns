@@ -1,0 +1,7 @@
+plugins {
+    id 'design-patterns.java-common-conventions'
+}
+
+application {
+    mainClass = 'com.reyadussalahin.strategy.App'
+}
