@@ -1,10 +1,14 @@
 package com.reyadussalahin.strategy;
 
 
-public class SortProvider {
+
+/**
+ * SortUtil uses different strategies to sort an integer array.
+ */
+public class SortUtil {
     private SortingStrategy sort;
 
-    public SortProvider(SortingStrategy sort) {
+    public SortUtil(SortingStrategy sort) {
         this.sort = sort;
     }
 
