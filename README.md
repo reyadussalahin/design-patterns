@@ -37,9 +37,7 @@ Design Patterns is, without any doubt one of the most hard to grasp topics in SE
 
 
 Introduction
--------------------
--------------------
-
+===================
 
 Types of Design Patterns
 -------------------
@@ -50,23 +48,20 @@ Types of Design Patterns
 
 
 Creational Design Patterns
--------------------
--------------------
+===================
 - Simple Factory
 - Factory Method
 - Abstract Factory Method
 
 
 Structural Design Patterns
--------------------
--------------------
+===================
 - Adapter
 - Decorator
 - Facade
 
 Behavioral Design Patterns
--------------------
--------------------
+===================
 - [Strategy](#-strategy)
 - Chain of Responsibility
 - Iterator
