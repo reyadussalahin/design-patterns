@@ -74,10 +74,10 @@ Behavioral Design Patterns
 
 👉 Strategy
 -------------------
-Real World Problem
+**Real World Problem**
 > Sasha is learning various sorting algoritms. She's learning `selection sort` now, but she knows in future, she's going to learn `insertion sort`, `quick sort`, `merge sort` etc. But right now, she's also building a library that can help her with sorting integer numbers. So, she wants to build the library in such a way that she can change the underlying sorting algorithm without changing the other parts of codebase where the sorting functionality is being called.
 
-Simply
+**To put Simply**
 > Strategy pattern provides a way to select an algorithm's behavior at runtime.
 
 **Code example**
@@ -146,15 +146,15 @@ Now, one can easily switch the `strategy` they choose:
 ```java
 Integer[] array = {1, 9, 8, 7, 4, 2, 0};
 
-        log.info("Unsorted Array: " + Arrays.toString(array));
+log.info("Unsorted Array: " + Arrays.toString(array));
 
-        SortUtil sortUtil = new SortUtil(new InsertionSort());
-        Integer[] sortedArray = sortUtil.sortIntegerArray(array);
-        log.info("Sorted Array: " + Arrays.toString(sortedArray));
+SortUtil sortUtil = new SortUtil(new InsertionSort());
+Integer[] sortedArray = sortUtil.sortIntegerArray(array);
+log.info("Sorted Array: " + Arrays.toString(sortedArray));
 
-        sortUtil = new SortUtil(new SelectionSort());
-        sortedArray = sortUtil.sortIntegerArray(array);
-        log.info("Sorted Array: " + Arrays.toString(sortedArray));
+sortUtil = new SortUtil(new SelectionSort());
+sortedArray = sortUtil.sortIntegerArray(array);
+log.info("Sorted Array: " + Arrays.toString(sortedArray));
 ```
 
 **You can find the full example code [here](strategy/).**
