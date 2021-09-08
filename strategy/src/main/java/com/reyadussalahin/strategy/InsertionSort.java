@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class InsertionSort implements SortingStrategy {
+    
     public Integer[] apply(Integer[] array) {
         log.info("Sorting strategy: Insertion Sort");
 

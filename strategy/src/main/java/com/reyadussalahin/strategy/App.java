@@ -26,11 +26,11 @@ public class App {
 
         log.info("Unsorted Array: " + Arrays.toString(array));
 
-        SortUtil sortUtil = new SortUtil(new InsertionSort());
+        SortUtil sortUtil = new SortUtil(new SelectionSort());
         Integer[] sortedArray = sortUtil.sortIntegerArray(array);
         log.info("Sorted Array: " + Arrays.toString(sortedArray));
 
-        sortUtil = new SortUtil(new SelectionSort());
+        sortUtil = new SortUtil(new InsertionSort());
         sortedArray = sortUtil.sortIntegerArray(array);
         log.info("Sorted Array: " + Arrays.toString(sortedArray));
     }

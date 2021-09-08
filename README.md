@@ -67,7 +67,7 @@ Behavioral Design Patterns
 - Iterator
 - Observer
 
-👉 Strategy
+✨ Strategy
 -------------------
 **Real World Problem**
 > Sasha is learning various sorting algoritms. She's learning `selection sort` now, but she knows in future, she's going to learn `insertion sort`, `quick sort`, `merge sort` etc. But right now, she's also building a library that can help her with sorting integer numbers. So, she wants to build the library in such a way that she can change the underlying sorting algorithm without changing the other parts of codebase where the sorting functionality is being called.
@@ -77,7 +77,7 @@ Behavioral Design Patterns
 
 **Code example**
 
-Consider an interface that provides a method for sorting integer array.
+Consider an interface `SortingStrategy` that provides a method for sorting integer array.
 
 ```java
 public interface SortingStrategy {
@@ -85,7 +85,52 @@ public interface SortingStrategy {
 }
 ```
 
-Now consider classes two different strategy insertion sort and selection sort where both classes implements `SortingStrategy`.
+And a class `SortUtil` that's provide sorting facility, but it takes an object of type `SortingStrategy` as input which is responsible for sorting.
+
+```java
+public class SortUtil {
+    private SortingStrategy sort;
+
+    public SortUtil(SortingStrategy sort) {
+        this.sort = sort;
+    }
+
+    public Integer[] sortIntegerArray(Integer[] array) {
+        return this.sort.apply(array);
+    }
+}
+```
+
+Now consider classes two different strategy insertion sort and selection sort where both classes implements `SortingStrategy`.  
+  
+Here is the implementation of `SelectionSort`:
+
+```java
+// selection sort
+@Slf4j
+public class SelectionSort implements SortingStrategy {
+    public void swap(Integer[] arr, int i, int j) {
+        Integer temp = arr[j];
+        arr[j] = arr[i];
+        arr[i] = temp;
+    }
+    public Integer[] apply(Integer[] array) {
+        log.info("Sorting strategy: Selection Sort");
+        // performing selection sort
+        Integer[] buf = Arrays.copyOf(array, array.length);
+        for(int i=0; i<buf.length; ++i) {
+            int x = i;
+            for(int j=i+1; j<buf.length; ++j) {
+                if(buf[j] < buf[x]) x = j;
+            }
+            swap(buf, i, x);
+        }
+        return buf;
+    }
+}
+```
+
+Here is the implementation of `InsertionSort`:
 
 ```java
 // insertion sort
@@ -93,10 +138,8 @@ Now consider classes two different strategy insertion sort and selection sort wh
 public class InsertionSort implements SortingStrategy {
     public Integer[] apply(Integer[] array) {
         log.info("Sorting strategy: Insertion Sort");
-
         // performing insertion sort
         Integer[] buf = Arrays.copyOf(array, array.length);
-        
         for(int i=0; i<buf.length; ++i) {
             int j = i-1, key = buf[i];
             while(j >= 0 && key < buf[j]) {
@@ -105,32 +148,6 @@ public class InsertionSort implements SortingStrategy {
             }
             buf[j+1] = key;
         }
-
-        return buf;
-    }
-}
-
-// selection sort
-@Slf4j
-public class SelectionSort implements SortingStrategy {
-    public Integer[] apply(Integer[] array) {
-        log.info("Sorting strategy: Selection Sort");
-
-        // performing selection sort
-        Integer[] buf = Arrays.copyOf(array, array.length);
-
-        for(int i=0; i<buf.length; ++i) {
-            int x = i;
-            for(int j=i+1; j<buf.length; ++j) {
-                if(buf[j] < buf[x]) {
-                    x = j;
-                }
-            }
-            int t = buf[x];
-            buf[x] = buf[i];
-            buf[i] = t;
-        }
-
         return buf;
     }
 }
@@ -141,13 +158,11 @@ Now, one can easily switch the `strategy` they choose:
 ```java
 Integer[] array = {1, 9, 8, 7, 4, 2, 0};
 
-log.info("Unsorted Array: " + Arrays.toString(array));
-
-SortUtil sortUtil = new SortUtil(new InsertionSort());
+SortUtil sortUtil = new SortUtil(new SelectionSort());
 Integer[] sortedArray = sortUtil.sortIntegerArray(array);
 log.info("Sorted Array: " + Arrays.toString(sortedArray));
 
-sortUtil = new SortUtil(new SelectionSort());
+sortUtil = new SortUtil(new InsertionSort());
 sortedArray = sortUtil.sortIntegerArray(array);
 log.info("Sorted Array: " + Arrays.toString(sortedArray));
 ```

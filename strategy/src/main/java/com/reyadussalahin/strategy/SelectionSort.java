@@ -13,6 +13,13 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class SelectionSort implements SortingStrategy {
+
+    public void swap(Integer[] arr, int i, int j) {
+        Integer temp = arr[j];
+        arr[j] = arr[i];
+        arr[i] = temp;
+    }
+
     public Integer[] apply(Integer[] array) {
         log.info("Sorting strategy: Selection Sort");
 
@@ -26,9 +33,7 @@ public class SelectionSort implements SortingStrategy {
                     x = j;
                 }
             }
-            int t = buf[x];
-            buf[x] = buf[i];
-            buf[i] = t;
+            swap(buf, i, x);
         }
 
         return buf;
